@@ -43,7 +43,7 @@ public class ProductoController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
     public ResponseEntity<Mensaje> create(@RequestBody ProductoDto productoDto){
-        if(!StringUtils.isBlank(productoDto.getNombre()))
+        if(StringUtils.isBlank(productoDto.getNombre()))
             return new ResponseEntity<Mensaje>(new Mensaje("El nombre del producto es obligatorio"), HttpStatus.BAD_REQUEST);
         if(productoDto.getPrecio()==null || productoDto.getPrecio()<0)
             return new ResponseEntity<Mensaje>(new Mensaje("El precio debe ser mayor que 0.0"), HttpStatus.BAD_REQUEST);
